@@ -52,15 +52,15 @@
 |     created_at      |  timestamp   |   Yes    |   No   |  Null   |             |
 |     updated_at      |  timestamp   |   Yes    |   No   |  Null   |             |
 
-## comments
+## article_comments
 
-|      Name       |    Type    | Nullable | Unique | Default | Description |
-| :-------------: | :--------: | :------: | :----: | :-----: | :---------: |
-|       id        | bigint(20) |    No    |  Yes   |  Null   | primary key |
-|   article_id    | bigint(20) |    No    |  Yes   |  Null   | foreign key |
-|     user_id     | bigint(20) |    No    |  Yes   |  Null   | foreign key |
-|  comment_title  |    text    |    No    |   No   |   ''    |             |
-| comment_content |  longtext  |    No    |   No   |  Null   |             |
-|   created_at    | timestamp  |   Yes    |   No   |  Null   |             |
-|   updated_at    | timestamp  |   Yes    |   No   |  Null   |             |
-|   deleted_at    | timestamp  |   Yes    |   No   |  Null   |             |
+|          Name           |    Type    | Nullable | Unique | Default | Description |
+| :---------------------: | :--------: | :------: | :----: | :-----: | :---------: |
+|           id            | bigint(20) |    No    |  Yes   |  Null   | primary key |
+|       article_id        | bigint(20) |    No    |  Yes   |  Null   | foreign key |
+|         user_id         | bigint(20) |    No    |  Yes   |  Null   | foreign key |
+|  article_comment_title  |    text    |    No    |   No   |   ''    |             |
+| article_comment_content |  longtext  |    No    |   No   |  Null   |             |
+|       created_at        | timestamp  |   Yes    |   No   |  Null   |             |
+|       updated_at        | timestamp  |   Yes    |   No   |  Null   |             |
+|       deleted_at        | timestamp  |   Yes    |   No   |  Null   |             |
