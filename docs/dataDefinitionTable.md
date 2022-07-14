@@ -26,13 +26,13 @@
 
 ## article_article_category
 
-|    Name     |    Type    | Nullable | Unique | Default | Description |
-| :---------: | :--------: | :------: | :----: | :-----: | :---------: |
-|     id      | bigint(20) |    No    |  Yes   |  Null   | primary key |
-| category_id | bigint(20) |    No    |  Yes   |  Null   | foreign key |
-| article_id  | bigint(20) |    No    |  Yes   |  Null   | foreign key |
-| created_at  | timestamp  |   Yes    |   No   |  Null   |             |
-| updated_at  | timestamp  |   Yes    |   No   |  Null   |             |
+|        Name         |    Type    | Nullable | Unique | Default | Description |
+| :-----------------: | :--------: | :------: | :----: | :-----: | :---------: |
+|         id          | bigint(20) |    No    |  Yes   |  Null   | primary key |
+| article_category_id | bigint(20) |    No    |  Yes   |  Null   | foreign key |
+|     article_id      | bigint(20) |    No    |  Yes   |  Null   | foreign key |
+|     created_at      | timestamp  |   Yes    |   No   |  Null   |             |
+|     updated_at      | timestamp  |   Yes    |   No   |  Null   |             |
 
 ## article_categories
 
