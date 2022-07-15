@@ -13,11 +13,11 @@ class ArticleArticleCategory extends Model
 
     public function articleCategory()
     {
-        return $this->belongsTo(ArticleCategory::class);
+        return $this->belongsToMany(ArticleCategory::class);
     }
 
     public function article()
     {
-        return $this->belongsTo(Article::class);
+        return $this->belongsToMany(Article::class);
     }
 }
