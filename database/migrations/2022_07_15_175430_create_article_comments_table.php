@@ -14,21 +14,8 @@ class CreateArticleCommentsTable extends Migration
     public function up()
     {
         Schema::create('article_comments', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('article_id')->unique();
-            $table->unsignedBigInteger('user_id')->unique();
-            $table->text('article_comment_title');
-            $table->longText('article_comment_content');
+            $table->id();
             $table->timestamps();
-            $table->softDeletes();
-            $table
-                ->foreign('article_id')
-                ->references('id')
-                ->on('articles');
-            $table
-                ->foreign('user_id')
-                ->references('id')
-                ->on('users');
         });
     }
 
