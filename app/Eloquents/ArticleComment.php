@@ -4,6 +4,7 @@ namespace App\Eloquents;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Eloquents\Article;
 
 class ArticleComment extends Model
@@ -17,7 +18,7 @@ class ArticleComment extends Model
      */
     protected $fillable = ['article_comment_title', 'article_comment_content'];
 
-    public function article()
+    public function article(): BelongsTo
     {
         return $this->belongsTo(Article::class);
     }

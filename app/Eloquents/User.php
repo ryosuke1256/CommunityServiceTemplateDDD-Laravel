@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Sanctum\HasApiTokens;
 use App\Eloquents\Article;
 use App\Eloquents\ArticleComment;
@@ -37,12 +38,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function article()
+    public function article(): HasMany
     {
         return $this->hasMany(Article::class);
     }
 
-    public function articleComment()
+    public function articleComment(): HasMany
     {
         return $this->hasMany(ArticleComment::class);
     }
