@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Eloquents;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use App\Eloquents\ArticleArticleCategory;
+use App\Models\ArticleArticleCategoryModel;
 
-class ArticleCategory extends Model
+class ArticleCategoryModel extends Model
 {
     use HasFactory;
 
@@ -20,6 +20,6 @@ class ArticleCategory extends Model
 
     public function articleArticleCategory(): BelongsToMany
     {
-        return $this->belongsToMany(ArticleArticleCategory::class);
+        return $this->belongsToMany(ArticleArticleCategoryModel::class);
     }
 }

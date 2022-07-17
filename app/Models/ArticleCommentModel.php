@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Eloquents;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Eloquents\Article;
+use App\Models\ArticleModel;
 
-class ArticleComment extends Model
+class ArticleCommentModel extends Model
 {
     use HasFactory;
 
@@ -16,10 +16,10 @@ class ArticleComment extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['article_comment_title', 'article_comment_content'];
+    protected $fillable = ['article_id', 'user_id', 'article_comment_title', 'article_comment_content'];
 
     public function article(): BelongsTo
     {
-        return $this->belongsTo(Article::class);
+        return $this->belongsTo(ArticleModel::class);
     }
 }
