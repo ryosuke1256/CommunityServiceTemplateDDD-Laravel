@@ -14,9 +14,18 @@
 ## 🗽 開発のルール
 
 -   タスクを Github の Issue に切り出す、Issue 毎にプルリクを作成、[
-プルリクとIssueをリンクしてマージする](https://docs.github.com/ja/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue)
+    プルリクと Issue をリンクしてマージする](https://docs.github.com/ja/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue)
 
-## 🦭 Gitのルール
+## 🦭 Git のルール
 
 -   GitHub Flow
--   コミットメッセージに適切なprefixをつける
+-   コミットメッセージに適切な prefix をつける
+
+## 🔥 使い方
+
+-   `.env`を作成する
+-   `composer install`
+-   `./vendor/bin/sail up -d`
+-   `./vendor/bin/sail artisan sail:publish`
+-   `./vendor/bin/sail artisan migrate`
+-   `./vendor/bin/sail artisan db:seed --class=ArticleStatusSeeder`
