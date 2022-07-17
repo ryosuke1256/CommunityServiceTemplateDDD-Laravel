@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Eloquents;
+namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -8,10 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Sanctum\HasApiTokens;
-use App\Eloquents\Article;
-use App\Eloquents\ArticleComment;
+use App\Models\ArticleModel;
+use App\Models\ArticleCommentModel;
 
-class User extends Authenticatable
+class UserModel extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -40,11 +40,11 @@ class User extends Authenticatable
 
     public function article(): HasMany
     {
-        return $this->hasMany(Article::class);
+        return $this->hasMany(ArticleModel::class);
     }
 
     public function articleComment(): HasMany
     {
-        return $this->hasMany(ArticleComment::class);
+        return $this->hasMany(ArticleCommentModel::class);
     }
 }
