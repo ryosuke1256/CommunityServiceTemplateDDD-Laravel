@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Eloquents;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Eloquents\Article;
+use App\Models\ArticleModel;
 
-class ArticleStatus extends Model
+class ArticleStatusModel extends Model
 {
     use HasFactory;
 
@@ -27,6 +27,6 @@ class ArticleStatus extends Model
 
     public function article(): HasMany
     {
-        return $this->hasMany(Article::class);
+        return $this->hasMany(ArticleModel::class);
     }
 }
