@@ -12,6 +12,13 @@ class ArticleArticleCategoryModel extends Model
 {
     use HasFactory;
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'article_article_categories';
+
     protected $fillable = ['article_category_id', 'article_id'];
 
     public function articleCategory(): BelongsToMany
