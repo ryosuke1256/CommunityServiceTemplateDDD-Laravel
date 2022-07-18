@@ -12,9 +12,16 @@ use App\Models\ArticleStatusModel;
 use App\Models\ArticleCommentModel;
 use App\Models\ArticleCategoryModel;
 
-class ArticleModel extends Model
+class ArticleModel extends Modele
 {
     use HasFactory;
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'articles';
 
     /**
      * The attributes that are mass assignable.
