@@ -14,11 +14,12 @@ class ArticleTitle
 
     public function __construct(string $text)
     {
-        if ((int) mb_strlen($text) > 0) {
-            $this->text = $text;
-        } else {
+        // ルール、制約
+        if ((int) mb_strlen($text) === 0) {
             throw new NotInputException('文字を入力してください');
         }
+
+        $this->text = $text;
     }
 
     final public function getText(): string
