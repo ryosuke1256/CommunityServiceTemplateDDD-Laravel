@@ -17,6 +17,7 @@ class ArticleContent
     {
         $textLength = (int) mb_strlen($text);
 
+        //　ルール、制約
         if ($textLength === 0) {
             throw new NotInputException('文字を入力してください');
         }

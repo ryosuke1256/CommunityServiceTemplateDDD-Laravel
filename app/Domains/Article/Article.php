@@ -41,6 +41,18 @@ class Article implements IArticle
         $this->deletedAt = $deletedAt;
     }
 
+    // ふるまい
+    final public function editTitle(ArticleTitle $title): void
+    {
+        $this->articleTitle = $title;
+    }
+
+    // ふるまい
+    final public function editContent(ArticleContent $content): void
+    {
+        $this->articleTitle = $content;
+    }
+
     final public function getId(): int
     {
         return $this->id;

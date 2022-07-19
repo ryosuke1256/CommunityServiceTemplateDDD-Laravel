@@ -1,21 +1,22 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Domains\Media;
+namespace App\Domains;
+use Illuminate\Support\Collection;
 
 class Media
 {
-    private array $articles;
+    private Collection $articles;
 
     private array $categories;
 
-    public function __construct(array $articles, array $categories)
+    public function __construct(Collection $articles, array $categories)
     {
         $this->articles = $articles;
         $this->categories = $categories;
     }
 
-    final public function getArticles(): array
+    final public function getArticles(): Collection
     {
         return $this->articles;
     }
