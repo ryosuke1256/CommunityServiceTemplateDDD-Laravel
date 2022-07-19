@@ -15,6 +15,7 @@ class ArticleCategory
     {
         $nameLength = (int) mb_strlen($name);
 
+        //　ルール、制約
         if ($nameLength === 0) {
             throw new NotInputException('文字を入力してください');
         }
