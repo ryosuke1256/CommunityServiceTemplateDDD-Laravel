@@ -4,8 +4,10 @@ declare(strict_types=1);
 namespace App\Domains\ArticleComment;
 
 use App\Exceptions\NotInputException;
-use Carbon\Carbon;
 
+/**
+ * Value Object
+ */
 class ArticleCommentContent
 {
     private string $text;

@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Domains;
+
 use Illuminate\Support\Collection;
 
 class Media

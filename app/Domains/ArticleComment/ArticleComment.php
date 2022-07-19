@@ -8,6 +8,11 @@ use App\Domains\ArticleComment\ArticleCommentTitle;
 use App\Domains\ArticleComment\ArticleCommentContent;
 use Carbon\Carbon;
 
+/**
+ * Entity
+ *
+ * 集約ルート
+ */
 class ArticleComment implements IArticleComment
 {
     private int $id;
