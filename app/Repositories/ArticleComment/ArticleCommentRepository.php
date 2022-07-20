@@ -24,8 +24,8 @@ class ArticleCommentRepository implements IArticleCommentRepository
         foreach ($comments as $comment) {
             $articleComments[] = new ArticleComment(
                 $comment->id,
-                new ArticleCommentTitle($comment->title),
-                new ArticleCommentContent($comment->content),
+                new ArticleCommentTitle(),
+                new ArticleCommentContent($comment->article_comment_content),
                 $comment->created_at,
                 $comment->updated_at,
                 $comment->deleted_at
@@ -40,7 +40,7 @@ class ArticleCommentRepository implements IArticleCommentRepository
             'user_id' => $user->getId(),
             'article_id' => $article->getId(),
             'title' => $articleComment->getTitle(),
-            'content' => $articleComment->content,
+            'content' => $articleComment->getContent(),
         ]);
     }
 
@@ -48,12 +48,12 @@ class ArticleCommentRepository implements IArticleCommentRepository
     {
         ArticleCommentModel::find($articleComment->getId())->update([
             'title' => $articleComment->getTitle(),
-            'content' => $articleComment->content,
+            'content' => $articleComment->getContent(),
         ]);
     }
 
     final public static function delete(ArticleComment $articleComment): void
     {
-        ArticleCommentModel::find($articleComment->getId())->dalete();
+        ArticleCommentModel::find($articleComment->getId())->delete();
     }
 }

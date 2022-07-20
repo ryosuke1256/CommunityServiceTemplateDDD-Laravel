@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Log;
 use Throwable;
 use App\Domains\User\User;
 use App\Domains\Article\Article;
+use App\Domains\Article\ArticleTitle;
+use App\Domains\Article\ArticleContent;
+use App\Domains\ArticleStatus\ArticleStatus;
+use App\Domains\ArticleCategory\ArticleCategory;
 use App\Models\ArticleModel;
 use App\Models\ArticleCategoryModel;
 use App\Models\ArticleStatusModel;
@@ -21,59 +25,68 @@ class ArticleRepository
     final public static function getAll(): array
     {
         try {
-            $articleArray = [];
             $articles = ArticleModel::orderBy('articles.created_at', 'desc')->get();
-
+            $articleCategories = [];
             foreach ($articles as $article) {
-                $articleArray[] = new Article(
-                    $article->id,
-                    $article->articleStatus(),
-                    $article->articleCategory(), //FIXME
-                    $article->title,
-                    $article->content,
-                    $article->created_at,
-                    $article->updated_at,
-                    $article->deleted_at
-                );
+                foreach ($article->articleCategories as $articleArticleCategory) {
+                    $articleCategories[] = new ArticleCategory(
+                        $articleArticleCategory->id,
+                        $articleArticleCategory->article_category_name
+                    );
+                }
             }
-            return $articles;
-        } catch (Throwable $e) {
-            Log::error('【Error】' . $e->getMessage());
-            throw $e;
-        }
-    }
 
-    /**
-     * @param int $displayCount
-     *
-     * @return array<Article>
-     */
-    final public static function getPartialArticles(int $displayCount): array
-    {
-        try {
             $articleArray = [];
-            $articles = ArticleModel::orderBy('articles.created_at', 'desc')
-                ->limit($displayCount)
-                ->get();
-
             foreach ($articles as $article) {
                 $articleArray[] = new Article(
                     $article->id,
-                    $article->articleStatus(),
-                    $article->articleCategory(), //FIXME
-                    $article->title,
-                    $article->content,
+                    new ArticleStatus($article->articleStatus->id, $article->articleStatus->article_status_name),
+                    $articleCategories,
+                    new ArticleTitle($article->title),
+                    new ArticleContent($article->content),
                     $article->created_at,
                     $article->updated_at,
                     $article->deleted_at
                 );
             }
-            return $articles;
+            return $articleArray;
         } catch (Throwable $e) {
             Log::error('【Error】' . $e->getMessage());
             throw $e;
         }
     }
+
+    // /**
+    //  * @param int $displayCount
+    //  *
+    //  * @return array<Article>
+    //  */
+    // final public static function getPartialArticles(int $displayCount): array
+    // {
+    //     try {
+    //         $articleArray = [];
+    //         $articles = ArticleModel::orderBy('articles.created_at', 'desc')
+    //             ->limit($displayCount)
+    //             ->get();
+
+    //         foreach ($articles as $article) {
+    //             $articleArray[] = new Article(
+    //                 $article->id,
+    //                 new ArticleStatus($article->articleStatus->id, $article->articleStatus->article_status_name),
+    //                 $article->articleCategory, //FIXME
+    //                 new ArticleTitle($article->title),
+    //                 new ArticleContent($article->content),
+    //                 $article->created_at,
+    //                 $article->updated_at,
+    //                 $article->deleted_at
+    //             );
+    //         }
+    //         return $articleArray;
+    //     } catch (Throwable $e) {
+    //         Log::error('【Error】' . $e->getMessage());
+    //         throw $e;
+    //     }
+    // }
 
     final public static function save(User $user, Article $article): void
     {
@@ -138,17 +151,14 @@ class ArticleRepository
         try {
             DB::beginTransaction();
 
-            // TODO: 一発で書ける書き方
-            $articleArticleCategories = ArticleArticleCategoryModel::where('article_id', $article->getId())
-                ->with('article_categories')
-                ->get();
-            ArticleArticleCategoryModel::where('article_id', $article->getId())->delete();
+            $articles = ArticleModel::find($article->getId());
+            $articleCategories = $articles->articleCategories;
 
-            foreach ($articleArticleCategories as $articleArticleCategory) {
-                $articleArticleCategory->articleCategory()->delete();
+            $articles->delete();
+
+            foreach ($articleCategories as $articleCategory) {
+                $articleCategory->delete();
             }
-
-            ArticleModel::find($article->getId())->delete();
 
             DB::commit();
         } catch (Throwable $e) {
