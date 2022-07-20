@@ -9,6 +9,10 @@ use Carbon\Carbon;
 
 interface IArticle
 {
+    public function editTitle(ArticleTitle $title): void;
+
+    public function editContent(ArticleContent $content): void;
+
     public function getId(): int;
 
     public function getTitle(): string;
