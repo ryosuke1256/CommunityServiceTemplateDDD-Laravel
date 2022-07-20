@@ -45,12 +45,12 @@ class UserModel extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function article(): HasMany
+    public function articles(): HasMany
     {
         return $this->hasMany(ArticleModel::class);
     }
 
-    public function articleComment(): HasMany
+    public function articleComments(): HasMany
     {
         return $this->hasMany(ArticleCommentModel::class);
     }

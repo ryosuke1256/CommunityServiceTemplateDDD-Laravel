@@ -25,7 +25,8 @@ class ArticleStatusModel extends Model
      */
     protected $fillable = ['article_status_name'];
 
-    public function article(): HasMany
+    // FIXME:複数形
+    public function articles(): HasMany
     {
         return $this->hasMany(ArticleModel::class);
     }
