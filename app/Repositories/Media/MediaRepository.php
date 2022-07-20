@@ -3,11 +3,12 @@ declare(strict_types=1);
 
 namespace App\Repositories\Media;
 
-use App\Domains\Media;
-use App\Repositories\Media\IMediaRepository;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Throwable;
+use App\Domains\Media;
+use App\Repositories\Media\IMediaRepository;
+use App\Models\ArticleModel;
 
 class MediaRepository implements IMediaRepository
 {
@@ -17,11 +18,8 @@ class MediaRepository implements IMediaRepository
     final public function getMedia(): Media
     {
         try {
-            $articles = DB::table('article')
-                ->orderBy('articles.created_at', 'desc')
-                ->get();
+            $articles = ArticleModel::orderBy('articles.created_at', 'desc')->get();
             $articleIds = [];
-            // FIXME: Performance
             foreach ($articles as $article) {
                 $articleIds[] = $article->id;
             }
