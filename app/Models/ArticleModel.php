@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,11 +12,12 @@ use App\Models\UserModel;
 use App\Models\ArticleStatusModel;
 use App\Models\ArticleCommentModel;
 use App\Models\ArticleCategoryModel;
+use App\Models\ArticleArticleCategoryModel;
 
 class ArticleModel extends Model
 {
     use HasFactory;
-
+    use SoftDeletes;
     /**
      * The table associated with the model.
      *
@@ -23,6 +25,7 @@ class ArticleModel extends Model
      */
     protected $table = 'articles';
 
+    protected $dates = ['deleted_at'];
     /**
      * The attributes that are mass assignable.
      *
@@ -40,13 +43,13 @@ class ArticleModel extends Model
         return $this->belongsTo(ArticleStatusModel::class);
     }
 
-    public function articleComment(): HasMany
+    public function articleComments(): HasMany
     {
         return $this->hasMany(ArticleCommentModel::class);
     }
 
-    public function articleCategory(): BelongsToMany
+    public function articleCategories(): BelongsToMany
     {
-        return $this->belongsToMany(ArticleCategoryModel::class);
+        return $this->belongsToMany(ArticleCategoryModel::class)->using(ArticleArticleCategoryModel::class);
     }
 }

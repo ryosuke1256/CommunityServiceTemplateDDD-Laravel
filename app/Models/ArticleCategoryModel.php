@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use App\Models\ArticleModel;
 use App\Models\ArticleArticleCategoryModel;
 
 class ArticleCategoryModel extends Model
@@ -25,8 +26,8 @@ class ArticleCategoryModel extends Model
      */
     protected $fillable = ['article_category_name'];
 
-    public function articleArticleCategory(): BelongsToMany
+    public function articles(): BelongsToMany
     {
-        return $this->belongsToMany(ArticleArticleCategoryModel::class);
+        return $this->belongsToMany(ArticleModel::class)->using(ArticleArticleCategoryModel::class);
     }
 }
