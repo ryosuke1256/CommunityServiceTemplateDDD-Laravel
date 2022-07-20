@@ -12,7 +12,7 @@ use App\Models\ArticleStatusModel;
 use App\Models\ArticleCommentModel;
 use App\Models\ArticleCategoryModel;
 
-class ArticleModel extends Modele
+class ArticleModel extends Model
 {
     use HasFactory;
 
