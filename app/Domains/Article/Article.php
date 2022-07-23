@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Domains\Article;
 
-use App\Domains\Article\IArticle;
 use App\Domains\ArticleStatus\ArticleStatus;
 use App\Domains\ArticleCategory\ArticleCategory;
 use App\Domains\Article\ArticleTitle;
@@ -15,9 +14,11 @@ use Carbon\Carbon;
  *
  * 集約ルート
  */
-class Article implements IArticle
+class Article
 {
-    private int $id;
+    private ?int $id;
+
+    private int $userId;
 
     private ArticleStatus $articleStatus;
 
@@ -36,8 +37,15 @@ class Article implements IArticle
 
     private Carbon $deletedAt;
 
-    public function __construct(
-        int $id,
+    private function __construct()
+    {
+    }
+
+    /**
+     * 生成
+     */
+    public static function create(
+        int $userId,
         ArticleStatus $articleStatus,
         array $articleCategories,
         ArticleTitle $articleTitle,
@@ -45,15 +53,45 @@ class Article implements IArticle
         Carbon $createdAt,
         Carbon $updatedAt,
         Carbon $deletedAt
-    ) {
-        $this->id = $id;
-        $this->articleStatus = $articleStatus;
-        $this->articleCategories = $articleCategories;
-        $this->articleTitle = $articleTitle;
-        $this->articleContent = $articleContent;
-        $this->createdAt = $createdAt;
-        $this->updatedAt = $updatedAt;
-        $this->deletedAt = $deletedAt;
+    ): self {
+        $article = new self();
+        $article->id = null;
+        $article->userId = $userId;
+        $article->articleStatus = $articleStatus;
+        $article->articleCategories = $articleCategories;
+        $article->articleTitle = $articleTitle;
+        $article->articleContent = $articleContent;
+        $article->createdAt = $createdAt;
+        $article->updatedAt = $updatedAt;
+        $article->deletedAt = $deletedAt;
+        return $article;
+    }
+
+    /**
+     * 再構築
+     */
+    public static function restoreFromSource(
+        int $id,
+        int $userId,
+        ArticleStatus $articleStatus,
+        array $articleCategories,
+        ArticleTitle $articleTitle,
+        ArticleContent $articleContent,
+        Carbon $createdAt,
+        Carbon $updatedAt,
+        Carbon $deletedAt
+    ): self {
+        $article = new self();
+        $article->id = $id;
+        $article->userId = $userId;
+        $article->articleStatus = $articleStatus;
+        $article->articleCategories = $articleCategories;
+        $article->articleTitle = $articleTitle;
+        $article->articleContent = $articleContent;
+        $article->createdAt = $createdAt;
+        $article->updatedAt = $updatedAt;
+        $article->deletedAt = $deletedAt;
+        return $article;
     }
 
     // ふるまい
@@ -71,6 +109,11 @@ class Article implements IArticle
     final public function getId(): int
     {
         return $this->id;
+    }
+
+    final public function getUserId(): int
+    {
+        return $this->userId;
     }
 
     final public function getArticleStatus(): ArticleStatus

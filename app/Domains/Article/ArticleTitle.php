@@ -19,6 +19,10 @@ class ArticleTitle
             throw new NotInputException('文字を入力してください');
         }
 
+        if ((int) mb_strlen($text) >= 256) {
+            throw new \DomainException('255文字以下を入力してください');
+        }
+
         $this->text = $text;
     }
 
