@@ -31,11 +31,11 @@ class Article
 
     private ArticleContent $articleContent;
 
-    private Carbon $createdAt;
+    private ?Carbon $createdAt;
 
-    private Carbon $updatedAt;
+    private ?Carbon $updatedAt;
 
-    private Carbon $deletedAt;
+    private ?Carbon $deletedAt;
 
     private function __construct()
     {
@@ -44,15 +44,12 @@ class Article
     /**
      * 生成
      */
-    public static function create(
+    final public static function create(
         int $userId,
         ArticleStatus $articleStatus,
         array $articleCategories,
         ArticleTitle $articleTitle,
-        ArticleContent $articleContent,
-        Carbon $createdAt,
-        Carbon $updatedAt,
-        Carbon $deletedAt
+        ArticleContent $articleContent
     ): self {
         $article = new self();
         $article->id = null;
@@ -61,16 +58,16 @@ class Article
         $article->articleCategories = $articleCategories;
         $article->articleTitle = $articleTitle;
         $article->articleContent = $articleContent;
-        $article->createdAt = $createdAt;
-        $article->updatedAt = $updatedAt;
-        $article->deletedAt = $deletedAt;
+        $article->createdAt = null;
+        $article->updatedAt = null;
+        $article->deletedAt = null;
         return $article;
     }
 
     /**
      * 再構築
      */
-    public static function restoreFromSource(
+    final public static function restoreFromSource(
         int $id,
         int $userId,
         ArticleStatus $articleStatus,
