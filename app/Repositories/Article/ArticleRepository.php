@@ -17,7 +17,7 @@ use App\Models\ArticleCategoryModel;
 use App\Models\ArticleStatusModel;
 use App\Models\ArticleArticleCategoryModel;
 
-class ArticleRepository
+class ArticleRepository implements IArticleRepository
 {
     /**
      * @return array<Article>
@@ -38,8 +38,9 @@ class ArticleRepository
 
             $articleArray = [];
             foreach ($articles as $article) {
-                $articleArray[] = new Article(
+                $articleArray[] = Article::restoreFromSource(
                     $article->id,
+                    $article->user_id,
                     new ArticleStatus($article->articleStatus->id, $article->articleStatus->article_status_name),
                     $articleCategories,
                     new ArticleTitle($article->title),
@@ -55,38 +56,6 @@ class ArticleRepository
             throw $e;
         }
     }
-
-    // /**
-    //  * @param int $displayCount
-    //  *
-    //  * @return array<Article>
-    //  */
-    // final public static function getPartialArticles(int $displayCount): array
-    // {
-    //     try {
-    //         $articleArray = [];
-    //         $articles = ArticleModel::orderBy('articles.created_at', 'desc')
-    //             ->limit($displayCount)
-    //             ->get();
-
-    //         foreach ($articles as $article) {
-    //             $articleArray[] = new Article(
-    //                 $article->id,
-    //                 new ArticleStatus($article->articleStatus->id, $article->articleStatus->article_status_name),
-    //                 $article->articleCategory, //FIXME
-    //                 new ArticleTitle($article->title),
-    //                 new ArticleContent($article->content),
-    //                 $article->created_at,
-    //                 $article->updated_at,
-    //                 $article->deleted_at
-    //             );
-    //         }
-    //         return $articleArray;
-    //     } catch (Throwable $e) {
-    //         Log::error('【Error】' . $e->getMessage());
-    //         throw $e;
-    //     }
-    // }
 
     final public static function save(User $user, Article $article): void
     {
@@ -146,12 +115,12 @@ class ArticleRepository
         }
     }
 
-    final public static function delete(Article $article): void
+    final public static function delete(int $articleId): void
     {
         try {
             DB::beginTransaction();
 
-            $articles = ArticleModel::find($article->getId());
+            $articles = ArticleModel::find($articleId);
             $articleCategories = $articles->articleCategories;
 
             $articles->delete();
