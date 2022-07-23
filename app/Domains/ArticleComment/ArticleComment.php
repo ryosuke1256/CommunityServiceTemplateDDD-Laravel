@@ -13,7 +13,7 @@ use Carbon\Carbon;
  *
  * 集約ルート
  */
-class ArticleComment implements IArticleComment
+class ArticleComment
 {
     private int $id;
 
