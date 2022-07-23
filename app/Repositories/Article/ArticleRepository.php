@@ -17,7 +17,7 @@ use App\Models\ArticleCategoryModel;
 use App\Models\ArticleStatusModel;
 use App\Models\ArticleArticleCategoryModel;
 
-class ArticleRepository
+class ArticleRepository implements IArticleRepository
 {
     /**
      * @return array<Article>
@@ -38,8 +38,9 @@ class ArticleRepository
 
             $articleArray = [];
             foreach ($articles as $article) {
-                $articleArray[] = new Article(
+                $articleArray[] = Article::restoreFromSource(
                     $article->id,
+                    $article->user_id,
                     new ArticleStatus($article->articleStatus->id, $article->articleStatus->article_status_name),
                     $articleCategories,
                     new ArticleTitle($article->title),
@@ -146,12 +147,12 @@ class ArticleRepository
         }
     }
 
-    final public static function delete(Article $article): void
+    final public static function delete(int $articleId): void
     {
         try {
             DB::beginTransaction();
 
-            $articles = ArticleModel::find($article->getId());
+            $articles = ArticleModel::find($articleId);
             $articleCategories = $articles->articleCategories;
 
             $articles->delete();
