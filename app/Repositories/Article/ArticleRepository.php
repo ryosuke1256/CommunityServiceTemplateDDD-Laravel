@@ -57,38 +57,6 @@ class ArticleRepository implements IArticleRepository
         }
     }
 
-    // /**
-    //  * @param int $displayCount
-    //  *
-    //  * @return array<Article>
-    //  */
-    // final public static function getPartialArticles(int $displayCount): array
-    // {
-    //     try {
-    //         $articleArray = [];
-    //         $articles = ArticleModel::orderBy('articles.created_at', 'desc')
-    //             ->limit($displayCount)
-    //             ->get();
-
-    //         foreach ($articles as $article) {
-    //             $articleArray[] = new Article(
-    //                 $article->id,
-    //                 new ArticleStatus($article->articleStatus->id, $article->articleStatus->article_status_name),
-    //                 $article->articleCategory, //FIXME
-    //                 new ArticleTitle($article->title),
-    //                 new ArticleContent($article->content),
-    //                 $article->created_at,
-    //                 $article->updated_at,
-    //                 $article->deleted_at
-    //             );
-    //         }
-    //         return $articleArray;
-    //     } catch (Throwable $e) {
-    //         Log::error('【Error】' . $e->getMessage());
-    //         throw $e;
-    //     }
-    // }
-
     final public static function save(User $user, Article $article): void
     {
         try {
