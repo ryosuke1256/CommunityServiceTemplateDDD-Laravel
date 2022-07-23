@@ -14,7 +14,6 @@ use App\Domains\ArticleStatus\ArticleStatus;
 use App\Domains\ArticleCategory\ArticleCategory;
 use App\Models\ArticleModel;
 use App\Models\ArticleCategoryModel;
-use App\Models\ArticleStatusModel;
 use App\Models\ArticleArticleCategoryModel;
 
 class ArticleRepository implements IArticleRepository

@@ -22,8 +22,10 @@ class ArticleCommentRepository implements IArticleCommentRepository
 
         $articleComments = [];
         foreach ($comments as $comment) {
-            $articleComments[] = new ArticleComment(
+            $articleComments[] = ArticleComment::restoreFromSource(
                 $comment->id,
+                $comment->user_id,
+                $comment->article_id,
                 new ArticleCommentTitle(),
                 new ArticleCommentContent($comment->article_comment_content),
                 $comment->created_at,
