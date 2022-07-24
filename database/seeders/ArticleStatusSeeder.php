@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Eloquents\ArticleStatus;
+use App\Models\ArticleStatusModel;
 
 class ArticleStatusSeeder extends Seeder
 {
@@ -14,7 +14,7 @@ class ArticleStatusSeeder extends Seeder
      */
     public function run()
     {
-        ArticleStatus::insert([
+        ArticleStatusModel::insert([
             ['article_status_name' => '編集中'],
             ['article_status_name' => '公開'],
             ['article_status_name' => '非公開'],
