@@ -43,6 +43,16 @@
 |      created_at       |  timestamp   |   Yes    |   No   |  Null   |             |
 |      updated_at       |  timestamp   |   Yes    |   No   |  Null   |             |
 
+## article_tags
+
+|       Name       |     Type     | Nullable | Unique | Default | Description |
+| :--------------: | :----------: | :------: | :----: | :-----: | :---------: |
+|        id        |  bigint(20)  |    No    |  Yes   |  Null   | primary key |
+|    article_id    | varchar(255) |    No    |  Yes   |  Null   |             |
+| article_tag_name | varchar(255) |    No    |   No   |  Null   |             |
+|    created_at    |  timestamp   |   Yes    |   No   |  Null   |             |
+|    updated_at    |  timestamp   |   Yes    |   No   |  Null   |             |
+
 ## article_statuses
 
 |        Name         |     Type     | Nullable | Unique | Default | Description |
