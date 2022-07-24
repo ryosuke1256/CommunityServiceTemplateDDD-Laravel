@@ -13,6 +13,7 @@ use App\Models\ArticleStatusModel;
 use App\Models\ArticleCommentModel;
 use App\Models\ArticleCategoryModel;
 use App\Models\ArticleArticleCategoryModel;
+use App\Models\ArticleTagModel;
 
 class ArticleModel extends Model
 {
@@ -46,6 +47,11 @@ class ArticleModel extends Model
     public function articleComments(): HasMany
     {
         return $this->hasMany(ArticleCommentModel::class);
+    }
+
+    public function articleTags(): HasMany
+    {
+        return $this->hasMany(ArticleTagModel::class);
     }
 
     public function articleCategories(): BelongsToMany
