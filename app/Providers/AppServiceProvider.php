@@ -9,8 +9,6 @@ use App\Repositories\Article\ArticleRepository;
 use App\Repositories\Article\IArticleRepository;
 use App\Repositories\ArticleComment\ArticleCommentRepository;
 use App\Repositories\ArticleComment\IArticleCommentRepository;
-use App\Repositories\Media\MediaRepository;
-use App\Repositories\Media\IMediaRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,7 +22,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IArticleService::class, ArticleService::class);
         $this->app->bind(IArticleRepository::class, ArticleRepository::class);
         $this->app->bind(IArticleCommentRepository::class, ArticleCommentRepository::class);
-        $this->app->bind(IMediaRepository::class, MediaRepository::class);
     }
 
     /**
