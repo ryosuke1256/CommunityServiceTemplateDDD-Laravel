@@ -1,3 +1,5 @@
+[![LaravelTest](https://github.com/ryosuke1256/CommunityServiceTemplateDDD/actions/workflows/ci.yml/badge.svg)](https://github.com/ryosuke1256/CommunityServiceTemplateDDD/actions/workflows/ci.yml)
+
 ## 🎋 なぜやるのか
 
 -   ドメイン駆動設計を実践しながら理解を深める
