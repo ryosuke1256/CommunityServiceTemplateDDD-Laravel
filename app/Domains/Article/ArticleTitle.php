@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace App\Domains\Article;
 
-use App\Exceptions\NotInputException;
-
 /**
  * Value Object
  */
@@ -16,7 +14,7 @@ class ArticleTitle
     {
         // ルール、制約
         if ((int) mb_strlen($text) === 0) {
-            throw new NotInputException('文字を入力してください');
+            throw new \DomainException('文字を入力してください');
         }
 
         if ((int) mb_strlen($text) >= 256) {

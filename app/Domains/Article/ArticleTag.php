@@ -3,7 +3,10 @@ declare(strict_types=1);
 
 namespace App\Domains\Article;
 
-class ArticleStatus
+/**
+ * Value object
+ */
+class ArticleTag
 {
     private ?int $id;
 
@@ -18,10 +21,10 @@ class ArticleStatus
      */
     final public static function create(string $name): self
     {
-        $articleStatus = new self();
-        $articleStatus->id = null;
-        $articleStatus->name = $name;
-        return $articleStatus;
+        $articleTag = new self();
+        $articleTag->id = null;
+        $articleTag->name = $name;
+        return $articleTag;
     }
 
     /**
@@ -29,10 +32,10 @@ class ArticleStatus
      */
     final public static function restoreFromSource(int $id, string $name): self
     {
-        $articleStatus = new self();
-        $articleStatus->id = $id;
-        $articleStatus->name = $name;
-        return $articleStatus;
+        $articleTag = new self();
+        $articleTag->id = $id;
+        $articleTag->name = $name;
+        return $articleTag;
     }
 
     final public function getId(): ?int

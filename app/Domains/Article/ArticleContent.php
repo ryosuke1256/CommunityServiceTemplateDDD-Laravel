@@ -3,9 +3,6 @@ declare(strict_types=1);
 
 namespace App\Domains\Article;
 
-use App\Exceptions\NotInputException;
-use App\Exceptions\InvalidTextLengthException;
-
 /**
  * Value Object
  */
@@ -19,11 +16,7 @@ class ArticleContent
 
         //　ルール、制約
         if ($textLength === 0) {
-            throw new NotInputException('文字を入力してください');
-        }
-
-        if ($textLength < 10) {
-            throw new InvalidTextLengthException('10文字以上の入力が必要です');
+            throw new \DomainException('文字を入力してください');
         }
 
         $this->text = $text;

@@ -3,8 +3,9 @@ declare(strict_types=1);
 
 namespace App\Domains\Article;
 
-use App\Domains\ArticleStatus\ArticleStatus;
-use App\Domains\ArticleCategory\ArticleCategory;
+use App\Domains\Article\ArticleStatus;
+use App\Domains\Article\ArticleTags;
+use App\Domains\Article\ArticleCategory;
 use App\Domains\Article\ArticleTitle;
 use App\Domains\Article\ArticleContent;
 use Carbon\Carbon;
@@ -22,6 +23,7 @@ class Article
 
     private ArticleStatus $articleStatus;
 
+    private ArticleTags $articleTags;
     /**
      * @var array<ArticleCategory>
      */
@@ -103,7 +105,11 @@ class Article
         $this->articleContent = $content;
     }
 
-    final public function getId(): int
+    // TODO:editStatus
+
+    // TODO:editCategories
+
+    final public function getId(): ?int
     {
         return $this->id;
     }
@@ -133,17 +139,17 @@ class Article
         return $this->articleContent->getText();
     }
 
-    final public function getCreatedAt(): Carbon
+    final public function getCreatedAt(): ?Carbon
     {
         return $this->createdAt;
     }
 
-    final public function getUpdatedAt(): Carbon
+    final public function getUpdatedAt(): ?Carbon
     {
         return $this->updatedAt;
     }
 
-    final public function getDeletedAt(): Carbon
+    final public function getDeletedAt(): ?Carbon
     {
         return $this->deletedAt;
     }

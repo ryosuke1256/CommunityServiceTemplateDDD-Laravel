@@ -20,6 +20,7 @@ class ArticleComment
 
     private int $articleId;
 
+    /** タイトルは使用していない */
     private ArticleCommentTitle $articleCommentTitle;
 
     private ArticleCommentContent $articleCommentContent;
