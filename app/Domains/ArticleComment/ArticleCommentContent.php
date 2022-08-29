@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace App\Domains\ArticleComment;
 
-use App\Exceptions\NotInputException;
-
 /**
  * Value Object
  */
@@ -17,7 +15,7 @@ class ArticleCommentContent
         $textLength = (int) mb_strlen($text);
 
         if ($textLength === 0) {
-            throw new NotInputException('文字を入力してください');
+            throw new \DomainException('文字を入力してください');
         }
 
         $this->text = $text;

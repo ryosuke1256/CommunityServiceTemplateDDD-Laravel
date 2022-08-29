@@ -10,10 +10,34 @@ class ArticleCommentTitle
 {
     private string $text;
 
-    public function __construct()
+    private function __construct()
     {
-        // CommentのTitleは使用していないがNULL制約があるため空文字を入れる
-        $this->text = '';
+    }
+
+    /**
+     * 生成
+     */
+    final public static function create(): self
+    {
+        $articleCommentTitle = new self();
+        // 使用していないがNULL制約があるため空文字を入れる
+        $articleCommentTitle->text = '';
+        return $articleCommentTitle;
+    }
+
+    /**
+     * 再構築
+     */
+    final public static function restoreFromSource(string $commentTitle): self
+    {
+        if ($commentTitle !== '') {
+            throw new \DomainException('コメントのタイトルは空文字が正常値です');
+        }
+
+        $articleCommentTitle = new self();
+        $articleCommentTitle->text = $commentTitle;
+
+        return $articleCommentTitle;
     }
 
     final public function getText(): string
